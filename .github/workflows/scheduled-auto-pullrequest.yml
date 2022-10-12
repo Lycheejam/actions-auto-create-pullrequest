@@ -11,17 +11,16 @@ on:
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.PAT }}
-          branch: main
-          base: develop
-          title: '[Auto PullRequest] Merge master into develop'
-          labels: |
-            automated pr
-          assignees: lycheejam
-          reviewers: lycheejam
+      - name: Check if pullrequest exists
+        id: check_pullrequest
+        run: |
+          pullrequest_title='[Auto PullRequest] Merge master into develop'
+          base_branch=develop
+          echo "::set-output name=count::$(gh pr list -S ${pullrequest_title}' in:title' -B $base_branch | wc -l)"
+      - name: Create pullrequest main into develop
+        if: ${{ steps.check_pullrequest.outputs.count == 0 }}
+        run: |
+          gh pr create -B main -H develop -t '[Auto PullRequest] Merge master into develop' -b 'auto create pullrequest'
