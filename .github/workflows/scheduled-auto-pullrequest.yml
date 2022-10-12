@@ -19,10 +19,9 @@ jobs:
       - name: Check if pullrequest exists
         id: check_pullrequest
         run: |
-          pullrequest_title="[Auto PullRequest] Merge master into develop"
           base_branch=develop
-          echo "::set-output name=count::$(gh pr list -S ${pullrequest_title}' in:title' -B $base_branch | wc -l)"
+          echo "::set-output name=count::$(gh pr list -l 'auto pullrequest' -B $base_branch | wc -l)"
       - name: Create pullrequest main into develop
         if: ${{ steps.check_pullrequest.outputs.count == 0 }}
         run: |
-          gh pr create -B develop -H main -t '[Auto PullRequest] Merge master into develop' -b 'auto create pullrequest'
+          gh pr create -B develop -H main -t '[Auto PullRequest] Merge master into develop' -b 'auto create pullrequest' -a Lycheejam
