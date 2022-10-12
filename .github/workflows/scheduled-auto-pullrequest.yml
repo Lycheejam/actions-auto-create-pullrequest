@@ -3,7 +3,7 @@ name: Create a pullrequest from master to develop (scheduled version)
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '06 15 * * *'
+    - cron:  '9 15 * * *'
 
 jobs:
   createPullRequest:
