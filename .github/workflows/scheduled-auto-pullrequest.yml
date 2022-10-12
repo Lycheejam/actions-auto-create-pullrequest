@@ -1,12 +1,9 @@
 name: Create a pullrequest from master to develop (scheduled version)
 
 on:
-  push:
-    branches:
-      - main
-  # schedule:
-  #   # * is a special character in YAML so you have to quote this string
-  #   - cron:  '00 14 * * *'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '06 15 * * *'
 
 jobs:
   createPullRequest:
