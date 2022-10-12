@@ -24,4 +24,4 @@ jobs:
       - name: Create pullrequest main into develop
         if: ${{ steps.check_pullrequest.outputs.count == 0 }}
         run: |
-          gh pr create -B main -H develop -t '[Auto PullRequest] Merge master into develop' -b 'auto create pullrequest'
+          gh pr create -B develop -H main -t '[Auto PullRequest] Merge master into develop' -b 'auto create pullrequest'
