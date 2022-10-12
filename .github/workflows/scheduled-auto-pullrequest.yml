@@ -11,13 +11,14 @@ on:
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
-
+    env:
+      GH_TOKEN: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v3
       - name: Check if pullrequest exists
         id: check_pullrequest
         run: |
-          pullrequest_title='[Auto PullRequest] Merge master into develop'
+          pullrequest_title='"[Auto PullRequest] Merge master into develop"'
           base_branch=develop
           echo "::set-output name=count::$(gh pr list -S ${pullrequest_title}' in:title' -B $base_branch | wc -l)"
       - name: Create pullrequest main into develop
