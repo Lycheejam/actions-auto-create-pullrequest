@@ -15,8 +15,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.PAT }}
-          delete-branch: true
-          branch-suffix: timestamp
+          branch: main
+          base: develop
           title: '[Auto PullRequest] Merge master into develop'
           labels: |
             automated pr
